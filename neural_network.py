@@ -8,9 +8,9 @@ class NeuralNetwork():
         self.layer_size = layer_size
         self.learn_rate = learn_rate
         matrix_factory = WeightMatrix(layer_size, layer_size)
-        # generates a weight matrix of the size (layer_size)², for the connections between the INPUT and HIDDEN layer
+        # generates a weight matrix of the size layer_size x layer_size, for the connections between the INPUT and HIDDEN layer
         self.input_hidden_layer_weights = matrix_factory.generate_matrix(layer_size)
-        # generates a weight matrix of the size (layer_size)², for the connections between the HIDDEN and OUTPUT layer
+        # generates a weight matrix of the size layer_size x layer_size, for the connections between the HIDDEN and OUTPUT layer
         self.hidden_output_layer_weights = matrix_factory.generate_matrix(layer_size)
 
     def trainNetwork(self, input, training_examples):
