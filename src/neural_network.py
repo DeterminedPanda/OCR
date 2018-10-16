@@ -14,23 +14,24 @@ class NeuralNetwork():
         self.hidden_output_layer_weights = matrix_factory.generate_matrix(layer_size)
 
     def trainNetwork(self, input, training_examples):
+        # query the input and save the output of the layers for later use in the backpropagation
         hidden_layer_output, output_layer_output = query(input)
-
+        # calculate the occured errors
         output_layer_errors = training_examples - output_layer_output
         hidden_layer_errors = numpy.dot(self.hidden_output_layer_weights.T, output_layer_errors)
-
-        self.hidden_output_layer_weights += self.learn_rate * numpy.dot((output_layer_errors * output_layer_output * (1.0 - output_layer_output)), numpy.transpose(hidden_layer_output))
-
+        # backpropagation; update the weights between the input & hidden layer and the weights between the hidden & output layer
+        self.hidden_output_layer_weights += self.learn_rate * numpy.dot((output_layer_errors * output_layer_output) * (1.0 - output_layer_output), numpy.transpose(hidden_layer_output))
+        self.input_hidden_layer_weights += self.learn_rate * numpy.dot((hidden_layer_errors * hidden_layer_output) * (1.0 - hidden_layer_output), numpy.transpose(input))
 
     def query(self, input):
         input = self.listToTransposed2DArray(input)
-
+        # input to output layer
         hidden_layer_input = self.matrixMultiplication(self.input_hidden_layer_weights, input)
         hidden_layer_output = self.sigmoid(hidden_layer_input)
-
+        # hidden to output layer
         output_layer_input = self.matrixMultiplication(self.hidden_output_layer_weights, hidden_layer_output)
         output_layer_output = self.sigmoid(output_layer_input)
-
+        
         return hidden_layer_output, output_layer_output
 
     # converts a list to a transposed 2D-array
