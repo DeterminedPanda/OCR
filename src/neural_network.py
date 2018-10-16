@@ -19,7 +19,7 @@ class NeuralNetwork():
         # calculate the occured errors
         output_layer_errors = training_examples - output_layer_output
         hidden_layer_errors = numpy.dot(self.hidden_output_layer_weights.T, output_layer_errors)
-        # backpropagation; update the weights between the input & hidden layer and the weights between the hidden & output layer
+        # backpropagation; update the weights between the input "&" hidden layer and the weights between the hidden "&" output layer
         self.hidden_output_layer_weights += self.learn_rate * numpy.dot((output_layer_errors * output_layer_output) * (1.0 - output_layer_output), numpy.transpose(hidden_layer_output))
         self.input_hidden_layer_weights += self.learn_rate * numpy.dot((hidden_layer_errors * hidden_layer_output) * (1.0 - hidden_layer_output), numpy.transpose(input))
 

@@ -1,1 +1,1 @@
-# OCR W.I.P
+# Optical Character Recognition W.I.P
