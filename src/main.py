@@ -10,17 +10,17 @@ learn_rate = 0.3
 neural_network = NeuralNetwork(input_nodes, hidden_nodes, output_nodes, learn_rate)
 file_reader = FileReader()
 
-def learn():
+def teachNetwork():
     training_data_list = file_reader.read("../resources/mnist_train.csv")
     for record in training_data_list:
         row_entries = record.split(",")
         targets = numpy.zeros(output_nodes) + 0.01
         shifted_input = shiftList(row_entries)
-        # the expected results index is set to 0.99, to check wether or not the neural network predicted the number correctly
+        # the expected index of the result is set to 0.99, to check wether or not the neural network predicted the number correctly
         targets[int(row_entries[0])] = 0.99
-        neural_network.trainNetwork(shifted_input, targets)
+        neural_network.train(shifted_input, targets)
 
-def test():
+def testNetwork():
     test_data_list = file_reader.read("../resources/mnist_test.csv")
     scoreboard = []
     for record in test_data_list:
@@ -37,16 +37,16 @@ def test():
 
 def shiftList(list):
     # transforms the training data set values that range from 0 - 255 to a training set with the range of 0.01 - 0.99.
-    # This is needed because the sigmoid activatio function only allows values in that range.
-    # Every value in the list is transformed except for the first value, since that value contains the expected result
+    # This is needed because the sigmoid activation function only allows values in that range.
+    # Every value in the list is transformed except for the first value, since that value contains the expected result.
     return (numpy.asfarray(list[1:]) / 255.0 * 0.99) + 0.01
 
 def main():
     print("Starting the learning process, this may take a while...")
-    learn()        
+    teachNetwork()        
     print("Completed the learning process.")
     print("Starting the testing process, this may take a while...")
-    results = test()
+    results = testNetwork()
     print("Completed the testing process.")
     print(f"The accuracy of the Neural Network is: {results:.2f}%")
 

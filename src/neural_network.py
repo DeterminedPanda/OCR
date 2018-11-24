@@ -15,7 +15,7 @@ class NeuralNetwork():
         # generates a weight matrix, for the connections between the HIDDEN and OUTPUT layer
         self.hidden_output_layer_weights = matrix_factory.generate_matrix(output_nodes, (output_nodes, hidden_nodes))
 
-    def trainNetwork(self, input_list, training_examples):
+    def train(self, input_list, training_examples):
         # convert lists to transposed 2D arrays
         input = self.listToTransposed2DArray(input_list)
         targets = self.listToTransposed2DArray(training_examples)
@@ -34,19 +34,16 @@ class NeuralNetwork():
     def query(self, input_list):
         input = self.listToTransposed2DArray(input_list)
         # input to output layer
-        hidden_layer_input = self.matrixMultiplication(self.input_hidden_layer_weights, input)
+        hidden_layer_input = numpy.dot(self.input_hidden_layer_weights, input)
         hidden_layer_output = self.sigmoid(hidden_layer_input)
         # hidden to output layer
-        output_layer_input = self.matrixMultiplication(self.hidden_output_layer_weights, hidden_layer_output)
+        output_layer_input = numpy.dot(self.hidden_output_layer_weights, hidden_layer_output)
         output_layer_output = self.sigmoid(output_layer_input)
         return hidden_layer_output, output_layer_output
 
     # converts a list to a transposed 2D-array
     def listToTransposed2DArray(self, list):
         return numpy.array(list, ndmin=2).T
-
-    def matrixMultiplication(self, matrix_one, matrix_two):
-        return numpy.dot(matrix_one, matrix_two)
 
     def sigmoid(self, data):
         return scipy.special.expit(data)

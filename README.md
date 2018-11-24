@@ -8,7 +8,7 @@ This repository requires that you have following python libraries installed:
 
 + `scipy`
 
-You can install these libraries using the `pip` packetmanager:
+You can install these libraries using the Python Package Manager `pip`:
 
 `[you@machine $] pip install numpy`
 
