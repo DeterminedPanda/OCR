@@ -26,9 +26,7 @@ def testNetwork():
     for record in test_data_list:
         row_entries = record.split(",")
         correct_label = int(row_entries[0])
-        # transforms the training data set values that range from 0 - 255 to a training set with the range of 0.01 - 0.99.
-        # Every value in the list is transformed except for the first value, since that value contains the expected result
-        shifted_input = (numpy.asfarray(row_entries[1:]) / 255.0 * 0.99) + 0.01
+        shifted_input = shiftList(row_entries)
         outputs = neural_network.query(shifted_input)[1]
         label = numpy.argmax(outputs)
         scoreboard.append(1) if label == correct_label else scoreboard.append(0)
