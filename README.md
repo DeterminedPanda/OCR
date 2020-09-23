@@ -1,4 +1,6 @@
-# Optical Character Recognition from scratch
+# Optical Character Recognition
+
+OCR made from scratch in Python
 
 ## Required Dependencies
 
