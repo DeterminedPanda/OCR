@@ -1,4 +1,4 @@
-# Optical Character Recognition
+# Optical Character Recognition from scratch
 
 ## Required Dependencies
 
